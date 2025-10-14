@@ -1,8 +1,31 @@
 html {
-  font-family: sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 20px;
 }
 
+.header_1 {
+  margin: 0 5px 0 5px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+}
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-links a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
 .card {
   display: flex;
   gap: 30px;
@@ -88,7 +111,7 @@ input[type="radio"]:checked + label {
 .button {
   margin: 125px 0 0 0;
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 .addtocard-bt {
   color: white;
@@ -104,7 +127,6 @@ input[type="radio"]:checked + label {
   transform: scale(1.1);
 }
 .like-bt {
-  color: white;
   background-color: white;
   width: 80px;
   height: 60px;
@@ -119,4 +141,12 @@ input[type="radio"]:checked + label {
   width: 40px;
   margin: 6px 0 10px 0;
   pad: 0 10px 0 10px;
+}
+
+.blue-bt {
+  background-color: #4e88f5;
+}
+
+.blue-heading2 {
+  color: #4e88f5;
 }
