@@ -27,6 +27,7 @@ nav {
   flex-direction: column;
 }
 .card {
+  max-width: 1200px;
   display: flex;
   gap: 30px;
   border: none;
@@ -73,6 +74,12 @@ label {
 
 input[type="radio"]:checked + label {
   background-color: rgb(118, 112, 101);
+  color: white;
+  transform: scale(1.1);
+}
+
+.blue input[type="radio"]:checked + label {
+  background-color: rgb(17, 0, 255);
   color: white;
   transform: scale(1.1);
 }
