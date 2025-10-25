@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(Image/background_image.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+/* INTRO */
+
+.intro {
+  /* background-color: aquamarine; */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 600px;
+  text-align: center;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+.intro h1 {
+  font-size: 80px;
+  margin-top: 0;
+  margin-bottom: 42px;
+  word-spacing: 5px;
+}
+.intro p {
+  font-size: 26px;
+  font-family: "Merriweather", serif;
+}
+
+/* HEADER */
+
+.header {
+  background-color: rgba(44, 44, 44, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 70px;
+  margin-right: 70px;
+  
+  padding-right: 30px;
+  
+  color: white;
+}
+
+.left-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+}
+
+.left-header span {
+  padding-right: 42px;
+  padding-left: 42px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+#span-white {
+  background-color: white;
+  color: black;
+}
+.right-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0;
+}
+
+.right-header i {
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Container */
+
+.container {
+  margin-left: 70px;
+  margin-right: 70px;
+  background-color: white;
+}
+
+/* First Container*/
+
+.first-container {
+  padding: 170px 170px 128px 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date {
+  font-size: 21px;
+  font-family: "Merriweather", georgia, serif;
+  font-weight: 0;
+}
+
+.first-container h1 {
+    font-size: 84px;
+    text-align: center;
+}
+
+.first-container p {
+    font-size: 21px;
+    text-align: center;
+    font-style: italic;
+}
