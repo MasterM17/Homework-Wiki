@@ -23,19 +23,41 @@
         homework project
       </p>
     </div>
-    <div class="header">
-      <ul class="left-header">
-        <li id="span-white"><span>THIS IS MASSIVELY</span></li>
-        <li><span>GENERIC PAGE</span></li>
-        <li><span>ELEMENTS REFERENCE</span></li>
-      </ul>
+    <!-- <button class="hamburger-button"></button> -->
+    <nav class="header">
+      <button class="hamburger-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="left-header">
+        <a href="index.html"><span>THIS IS MASSIVELY</span></a>
+
+        <a href="index.html"><span>GENERIC PAGE</span></a>
+
+        <a href="index.html"><span>ELEMENTS REFERENCE</span></a>
+      </div>
       <ul class="right-header">
-        <li><i class="fa fa-instagram fa-2x"></i></li>
-        <li><i class="fa fa-twitter fa-2x"></i></li>
-        <li><i class="fa fa-facebook fa-2x"></i></li>
-        <li><i class="fa fa-github fa-2x"></i></li>
+        <li>
+          <a href="https://www.instagram.com/">
+            <i class="fa fa-instagram fa-2x"></i
+          ></a>
+        </li>
+        <li>
+          <a href="https://x.com/"> <i class="fa fa-twitter fa-2x"></i></a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/">
+            <i class="fa fa-facebook fa-2x"></i
+          ></a>
+        </li>
+        <li>
+          <a href="https://github.com/MasterM17">
+            <i class="fa fa-github fa-2x"></i
+          ></a>
+        </li>
       </ul>
-    </div>
+    </nav>
     <div class="container">
       <div class="first-container">
         <div class="date"><h3>October 25, 2025</h3></div>
@@ -50,10 +72,7 @@
           </p>
         </div>
         <div>
-          <img
-            src="/Web_homework/Image/pic01.jpg"
-            alt="first-container-image"
-          />
+          <img src="./Image/pic01.jpg" alt="first-container-image" />
         </div>
         <div><button class="first-container-button">FULL STORY</button></div>
       </div>
@@ -151,15 +170,21 @@
         const elementToFade = document.querySelector(".intro");
 
         window.addEventListener("scroll", function () {
-          let scrollPosition = window.pageYOffset ;
-          let fadeOutDistance = 700;
+          let scrollPosition = window.pageYOffset;
+          let fadeOutDistance = 600;
 
           if (scrollPosition < fadeOutDistance) {
-            elementToFade.style.opacity = 1 - (scrollPosition / fadeOutDistance);
+            elementToFade.style.opacity = 1 - scrollPosition / fadeOutDistance;
           } else {
             elementToFade.style.opacity = 0;
           }
         });
+      });
+      const hamburgerButton = document.querySelector(".hamburger-button");
+      const leftHeader = document.querySelector(".left-header");
+
+      hamburgerButton.addEventListener("click", function () {
+        leftHeader.classList.toggle("is-open");
       });
     </script>
   </body>
