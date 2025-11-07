@@ -393,7 +393,7 @@ input {
       grid-template-columns: 1fr;
     }
     .right-header {
-      display: none;
+      /* display: none; */
     }
   }
 
