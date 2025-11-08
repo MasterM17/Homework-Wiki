@@ -68,7 +68,7 @@ const username = "User123";
 const password = "Strongpasword123";
 
 const enteredUsername = "User123";
-const enteredPassword = "Strongpasword123";
+const enteredPassword = "Strongpasword";
 
 if (username === enteredUsername && password === enteredPassword) {
   console.log("Sucessful login");

@@ -67,7 +67,8 @@ ul {
   display: none;
   background: transparent;
   border: none;
-  cursor: pointer;padding: 10px;
+  cursor: pointer;
+  padding: 10px;
 }
 .bar {
   display: block;
@@ -106,7 +107,6 @@ ul {
   justify-content: space-evenly;
   padding: 0;
   margin: 0;
-  
 }
 .right-header a {
   text-decoration: none;
@@ -377,7 +377,6 @@ input {
       height: 50px;
     }
 
-
     .header,
     .container {
       margin-left: 90px;
@@ -407,21 +406,34 @@ input {
       margin-right: 60px;
     }
     .left-header {
-      /* display: none; */
+      display: none;
       flex-direction: column;
       position: absolute;
       top: 60px;
       left: 0;
       width: 100%;
-      background-color: #333;
+      background-color: rgba(153, 153, 153, 0.6);
+      
       padding: 20px 0;
     }
-.left-header.is-open {
-    display: flex;
-  }
-  .hamburger-button {
-    display: block;
-  }
+    .left-header.is-open {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+    }
+    .left-header a {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      transition: 300ms;
+    }
+    .left-header a:hover {
+      background-color: transparent;
+      color: rgb(156, 5, 5);
+    }
+
+    .hamburger-button {
+      display: block;
+    }
     .first-container {
       padding: 44px 44px;
     }
