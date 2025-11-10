@@ -120,14 +120,13 @@ product.color = "blue";
 
 console.log(product);
 
-function addProperty(prop1, prop2) {
-  prop1.userBrand = prop2;
+function addProperty(obj, propKey, propValue) {
+  obj[propKey] = propValue; // obj[propkey] znaci otvara objekt pa trazi unutra 
 }
 function changeStock(prop1, prop2) {
   prop1.inStock = prop2;
 }
-let brand = "Asus";
 
-addProperty(product, brand); // prsaj profesora za dodavanje i za return dali menja
+addProperty(product,"brand", "Asus"); // prsaj profesora za dodavanje i za return dali menja
 changeStock(product, false);
 console.log(product);
