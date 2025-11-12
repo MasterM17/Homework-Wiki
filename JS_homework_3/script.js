@@ -63,17 +63,16 @@ let cart = [
 ];
 
 function howMuchItCosts(cartItems2) {
-  // let productName = null; prasaj sto ke napravi razlika, ne mora da gi korsitime zatoa sto se vo funkcija SCOPE dodeka kaj FOR mora da ima od Global SCOPE ? 
+  // let productName = null; prasaj sto ke napravi razlika, ne mora da gi korsitime zatoa sto se vo funkcija SCOPE dodeka kaj FOR mora da ima od Global SCOPE ?
   for (let i = 0; i < cartItems2.length; i++) {
-    productName = cartItems2[i].name;
-    productPrice = cartItems2[i].price;
-    productQuantity = cartItems2[i].quantity;
+    let productName = cartItems2[i].name;
+    let productPrice = cartItems2[i].price;
+    let productQuantity = cartItems2[i].quantity;
     console.log(
       `${productName} costs ${productPrice} and we have ${productQuantity} left in stock.`
     );
   }
 }
-
 
 function calculateTotal(cartItems) {
   let sumCartPrice = 0;
@@ -88,11 +87,21 @@ function calculateTotal(cartItems) {
   return totalPrice;
 }
 
+function calculateTax(productPrice) {
+  let productTaxed = productPrice * 0.18;
+  return productTaxed;
+}
+
 howMuchItCosts(cart);
 
 let sumPrice = calculateTotal(cart);
+let taxedPrice = sumPrice + calculateTax(sumPrice);
 
-console.log(`The total price of the cart is: $${sumPrice.toFixed(2)}`);
+console.log(
+  `The total price of the cart is: $${sumPrice.toFixed(
+    2
+  )} plus 18% tax will total: $${taxedPrice.toFixed(2)}`
+);
 
 console.log("--------------------------");
 
