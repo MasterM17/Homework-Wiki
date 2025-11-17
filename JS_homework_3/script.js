@@ -36,7 +36,7 @@ function calculateAverage(scoresArray) {
 }
 
 for (let i = 0; i < students.length; i++) {
-  let student = students[i]; // zosto vo array objects nemaat ime kako koga gi posebno definirame
+  let student = students[i]; // zosto vo array objects nemaat ime kako koga gi posebno definirame student = {} students [ { name: sds}]
   let avg = calculateAverage(student.exams);
   console.log(
     ` ${student.name} has an average score of ${avg.toFixed(2)} passed: ${
@@ -224,5 +224,6 @@ function findTop3PopulatedCountries(countriesArray) {
 let top3Countries = findTop3PopulatedCountries(countries);
 
 console.log(`The 3 most populated countries are: ${top3Countries}`);
+console.log("The 3 most populated countries are:" , top3Countries);
 console.log(top3Countries);
 // kako da izvadam samo ime na drzava od object i zosto dava error u ``
