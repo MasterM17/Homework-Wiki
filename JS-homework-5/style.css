@@ -1,0 +1,63 @@
+.dark-mode {
+  background-color: #282828;
+  color: rgb(231, 231, 231);
+}
+
+a {
+  text-decoration: none;
+}
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.first-container {
+  padding: 170px 170px 128px 170px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease; /* Makes all changes smooth */
+  cursor: pointer; /* Shows it's clickable */
+}
+
+.first-container-button {
+  border: 3px solid black;
+  background-color: transparent;
+  padding: 0;
+  margin: 30px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  width: 150px;
+  height: 60px;
+}
+
+.btn-hover{
+border: 3px solid #18bfef;
+  color: #18bfef;
+}
+
+.btn-click {
+  transform: translateY(3px); /* Push down */
+  background-color: #18bfef; /* Fill with blue */
+  color: white;
+  border: 3px solid #18bfef;
+  box-shadow: 0 3px 10px rgba(24, 191, 239, 0.4); /* Blue glow */
+}
+
+.underline-text {
+  text-decoration: underline;
+}
+
+#todo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
