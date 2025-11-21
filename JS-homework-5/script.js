@@ -49,24 +49,57 @@ btns.forEach((btn) => {
 // setTimeout + setInterval
 // Input pole preku koe mozam da kreiram todo so svojstva: "title" i "completed"
 // click listener na sekoe todo, toggle completed + hover + cursor: pointer
+let todos = [];
+
+function renderCard(todos) {
+  const todosContainer = document.getElementById("users-container");
+  // todosContainer.innerHTML = "";
+  todos.forEach((todo) => {
+    const card = document.createElement("div");
+    const nameH3 = document.createElement("h3");
+    const emailPara = document.createElement("p");
+    const adressPara = document.createElement("p");
+    const companyPara = document.createElement("p");
+
+    nameH3.innerText = todo.name;
+    emailPara.innerText = todo.email;
+    adressPara.innerText = todo.address.city;
+    companyPara.innerText = todo.company.name;
+
+    card.classList.add("card");
+
+    const cardArray = [emailPara, adressPara, companyPara]
+    cardArray.forEach((array) => array.classList.add("paragraph"))
+    // emailPara.classList.add("paragraph")
+
+    card.appendChild(nameH3);
+    card.appendChild(emailPara);
+    card.appendChild(adressPara);
+    card.appendChild(companyPara);
+    todosContainer.appendChild(card);
+  });
+}
 
 fetch("https://jsonplaceholder.typicode.com/users")
   .then((response) => response.json())
   .then((users) => {
+    todos = users;
     console.log(users);
-    const userData = document.getElementById("todo-container");
-    users.forEach((user) => {
-      userData.innerHTML += `
-        <div><h3>${user.name}</h3>
-        <p><strong>Email:</strong> ${user.email}</p>
-        <p><strong>City:</strong> ${user.address.city}</p>
-        <p><strong>Company:</strong> ${user.company.name}</p></div>
-      `;
-    });
+    renderCard(todos);
+
+    // const userData = document.getElementById("users-container");
+    // users.forEach((user) => {
+    //   userData.innerHTML += `
+    //     <div><h3>${user.name}</h3>
+    //     <p><strong>Email:</strong> ${user.email}</p>
+    //     <p><strong>City:</strong> ${user.address.city}</p>
+    //     <p><strong>Company:</strong> ${user.company.name}</p></div>
+    //   `;
+    // });      updated homework
   })
   .catch((eror) => {
     console.log("Nastana greska", eror);
-    document.getElementById("todo-container").innerHTML =
+    document.getElementById("users-container").innerHTML =
       ' <p style="color: red;"> <strong>Failed to fetch data. Please try again.</strong> </p>';
   })
   .finally(() => console.log("Fetch e uspesen"));
