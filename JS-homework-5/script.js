@@ -53,7 +53,7 @@ let todos = [];
 
 function renderCard(todos) {
   const todosContainer = document.getElementById("users-container");
-  // todosContainer.innerHTML = "";
+  todosContainer.innerHTML = "";
   todos.forEach((todo) => {
     const card = document.createElement("div");
     const nameH3 = document.createElement("h3");
