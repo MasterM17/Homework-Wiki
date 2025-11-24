@@ -1,0 +1,78 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework-6</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-white">
+    <div class="flex flex-col gap-2 p-8 sm:flex-row sm:items-center header bg-blue-300 text-white px-8 py-6 rounded-t-lg shadow-md flex flex-row flex-space-between">
+      <h1 class="text-3x1 font-bold uppercase tracking-wider">
+        My Books Library
+      </h1>
+      <button id="darkModeButton" class="flex items-center bg-blue-300 px-4 py-3 text-white hover:bg-blue-400">DARK MODE</button>
+    </div>
+
+    <div class="giant-container">
+        <div class="container flex gap-8 p-6">
+     <div class="aside-container overflow-x-auto rounded-lg shadow-lg p-6 bg-white w-80 flex-shrink-0">
+  <div class="input-card space-y-6">
+    
+    <div class="book-title flex flex-col">
+      <label for="title" class="mb-2 font-semibold text-gray-700">Title</label>
+      <input 
+        type="text" 
+        name="title" 
+        id="title" 
+        class="w-64 border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 transition outline-none"
+        placeholder="Enter book title"
+      />
+    </div>
+    
+    <div class="book-author flex flex-col">
+      <label for="author" class="mb-2 font-semibold text-gray-700">Author</label>
+      <input 
+        type="text" 
+        name="author" 
+        id="author" 
+        class="w-64 border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 transition outline-none"
+        placeholder="Enter author name"
+      />
+    </div>
+    
+    <div class="book-category flex flex-col">
+      <label for="category" class="mb-2 font-semibold text-gray-700">Category</label>
+      <input
+        type="text"
+        name="category"
+        id="category"
+        class="w-64 border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 transition outline-none"
+        placeholder="Enter book category"
+      />
+    </div>
+    <button class="cursor-pointer bg-green-400 text-white font-bold py-1 px-3 rounded shadow transition duration-200 ease-in-out" onclick="addBook()">ADD</button>
+    
+  </div>
+</div>
+      <div
+        id="main-container"
+        class="overflow-x-auto rounded-lg shadow-lg my-8"
+      >
+    <table id="header-table" class="min-w-full border border-gray-200 bg-white">
+        <tr class="text-white bg-blue-300">
+            <th id="header-title" class="cursor-pointer px-6 py-3 text-center font-bold text-white uppercase tracking-wider border-b border-gray-200">TITLE</th>
+            <th class="px-6 py-3 text-center font-bold text-white uppercase tracking-wider border-b border-gray-200">AUTHOR</th>
+            <th class="px-6 py-3 text-center font-bold text-white uppercase tracking-wider border-b border-gray-200">CATEGORY</th>
+            <th class="px-6 py-3 text-center font-bold text-white uppercase tracking-wider border-b border-gray-200">OPTIONS</th>
+        </tr>
+    </table>
+    <table id="main-table"></table>
+    <!-- <table id="main-table"></table> -->
+    
+    </div>
+    </div>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
