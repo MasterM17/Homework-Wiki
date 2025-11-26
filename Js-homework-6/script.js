@@ -92,6 +92,7 @@ function renderCard(books) {
     const row = document.createElement("tr");
     row.className = "hover:bg-blue-50 ";
     row.setAttribute("data-id", book.id);
+    // row.id = 
     const tbTitle = document.createElement("td");
     tbTitle.className = "px-6 py-4 border-b border-gray-200";
     const tbAuthor = document.createElement("td");
@@ -148,7 +149,7 @@ document.getElementById("title-header").addEventListener("click", () => {
     fetchedBooks.sort((a, b) => b.title.localeCompare(b.title));
   }
 
-  ascending = !ascending;
+  ascending = !ascending; //obratan state ascending da bide FALSE not operator
 
   renderCard(fetchedBooks);
 });
