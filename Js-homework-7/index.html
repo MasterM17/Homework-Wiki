@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS homework 7</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <a href="index.html">Admin Panel</a>
+    </div>
+
+    <form id="addProduct">
+      <label for="productTitle">Title</label
+      ><input
+        type="text"
+        name="productTitle"
+        id="productTitle"
+        placeholder="Enter product namef"
+        required
+      />
+      <label for="productCategory">Category</label
+      ><input
+        type="text"
+        name="productCategory"
+        id="productCategory"
+        placeholder="Enter product category"
+        required
+      />
+      <label for="productDescription">Description</label
+      ><input
+        type="text"
+        name="productDescription"
+        id="productDescription"
+        placeholder="Enter product Description"
+        required
+      /><label for="productPrice">Price</label
+      ><input
+        type="text"
+        name="productPrice"
+        id="productPrice"
+        placeholder="Enter product Price"
+        required
+      />
+      <button type="submit" id="addButton" >ADD</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

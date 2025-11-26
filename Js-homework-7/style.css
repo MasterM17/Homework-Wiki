@@ -1,0 +1,42 @@
+#addproduct {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  border: 2px solid rgb(51, 160, 127, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+th {
+  border: 2px solid rgb(51, 160, 127, 0.3);
+  border-radius: 8px 8px 0px 0px;
+  padding: 20px;
+  
+}
+
+td {
+  border: 2px solid rgb(51, 160, 127, 0.3);
+}
+
+td:nth-child(3), td:nth-child(4){
+    text-align: center;
+}
+
+#actionTH {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+button {
+    background-color: antiquewhite;
+    border-radius: 4px;
+    color: rgb(36, 130, 143);
+    border: none;
+}
+
+button:hover {
+    background-color: rgb(207, 182, 148);
+    color: rgb(67, 233, 255);
+}
