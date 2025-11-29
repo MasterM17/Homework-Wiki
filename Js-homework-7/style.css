@@ -12,31 +12,45 @@ th {
   border: 2px solid rgb(51, 160, 127, 0.3);
   border-radius: 8px 8px 0px 0px;
   padding: 20px;
-  
+  background-color: rgb(51, 160, 127, 0.3);
+  color: white;
+  font-size: 25px;
 }
 
 td {
   border: 2px solid rgb(51, 160, 127, 0.3);
+  /* height: 30px; */
+  padding: 15px;
 }
 
-td:nth-child(3), td:nth-child(4){
-    text-align: center;
+td:nth-child(3),
+td:nth-child(4) {
+  text-align: center;
 }
 
 #actionTH {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 button {
-    background-color: antiquewhite;
-    border-radius: 4px;
-    color: rgb(36, 130, 143);
-    border: none;
+  background-color: antiquewhite;
+  border-radius: 4px;
+  color: rgb(36, 130, 143);
+  border: none;
+  padding: 10px;
 }
 
 button:hover {
-    background-color: rgb(207, 182, 148);
-    color: rgb(67, 233, 255);
+  background-color: rgb(207, 182, 148);
+  color: rgb(67, 233, 255);
+}
+
+.buttonUpdate {
+  background-color: rgb(175, 202, 143);
+  border-radius: 4px;
+  color: rgb(54, 107, 74);
+  border: none;
+  padding: 10px;
 }
