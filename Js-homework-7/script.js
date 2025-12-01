@@ -1,21 +1,22 @@
-let fetchedProducts = [];// prazan array
+let fetchedProducts = []; // prazan array
 let currentEdit = null;
-
-
+updateUi();
 fetch("data.json")
   .then((results) => results.json())
   .then((apiProducts) => {
     console.log("eve gi api products", apiProducts);
-    const savedProducts = localStorage.getItem("products");// zimamo gi ako postoiv
-    if (savedProducts) { // ako postoiv u local ke gi dade 
+    const savedProducts = localStorage.getItem("products"); // zimamo gi ako postoiv
+    if (savedProducts) {
+      // ako postoiv u local ke gi dade
       fetchedProducts = JSON.parse(savedProducts);
-      displayProducts(fetchedProducts)
-    } else { // akop ne ke gi zeme od API ili u ovj slucaj data.json
+      renderProducts(fetchedProducts);
+    } else {
+      // akop ne ke gi zeme od API ili u ovj slucaj data.json
       fetchedProducts = apiProducts;
       localStorage.setItem("products", JSON.stringify(fetchedProducts));
-      displayProducts(fetchedProducts);
+      renderProducts(fetchedProducts);
     }
-  })// error ako ima 
+  }) // error ako ima
   .catch((eror) => {
     console.log("Nastana greska", eror);
     document.getElementById("main-table").innerHTML =
@@ -23,7 +24,7 @@ fetch("data.json")
     const savedProducts = localStorage.getItem("products");
     if (savedProducts) {
       fetchedProducts = JSON.parse(savedProducts);
-      displayProducts(fetchedProducts);
+      renderProducts(fetchedProducts);
     }
   })
   .finally(() => console.log("Fetch e uspesan"));
@@ -40,7 +41,7 @@ function uuidv4() {
 
 // izvadeni preko network
 
-function displayProducts(product) {
+function renderProducts(product) {
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
   product.forEach((products) => {
@@ -112,7 +113,7 @@ function addForm(event) {
     fetchedProducts = [newProduct, ...fetchedProducts];
     console.log("proverka dali raboti addForm:", fetchedProducts);
     updateLocalStorage();
-    displayProducts(fetchedProducts);
+    renderProducts(fetchedProducts);
 
     clearForm();
   }
@@ -123,7 +124,7 @@ function deleteForm(deletedId) {
   fetchedProducts = fetchedProducts.filter((deletP) => deletP.id !== deletedId);
   console.log("izbrisano so ID", deletedId);
   updateLocalStorage();
-  displayProducts(fetchedProducts);
+  renderProducts(fetchedProducts);
 }
 function editForm(editedId) {
   currentEdit = editedId;
@@ -184,7 +185,7 @@ function updateForm(updateId) {
   console.log("dali tacno targetira? ", productTargetId);
 
   updateLocalStorage();
-  displayProducts(fetchedProducts);
+  renderProducts(fetchedProducts);
   clearForm();
   disableEdit();
 }
@@ -204,3 +205,47 @@ function disableEdit() {
 }
 // mozev i so onclick="addForm()" vo html ama vaka da izvezbam
 document.getElementById("addButton").addEventListener("click", addForm);
+
+//admin
+
+const adminUser = "admin";
+const adminPass = "admin123";
+
+const loginForm = document.getElementById("login-form");
+const logoutBtn = document.getElementById("logoutBtn");
+
+// log in
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const userName = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (userName === adminUser && password === adminPass) {
+    localStorage.setItem("isAdminLoggedIn", "true");
+  } else {
+    alert("Wrong Credentials");
+  }
+
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  updateUi();
+});
+
+logoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("isAdminLoggedIn");
+
+  updateUi();
+});
+
+// trgni log in
+function updateUi() {
+  const admingLogIn = document.getElementById("login-form");
+
+  const isAdminlogIn = localStorage.getItem("isAdminLoggedIn") === "true";
+  if (isAdminlogIn) {
+    admingLogIn.style.display = "none";
+  } else {
+    admingLogIn.style.display = "block";
+  }
+}
