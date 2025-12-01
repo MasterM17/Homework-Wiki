@@ -54,3 +54,128 @@ button:hover {
   border: none;
   padding: 10px;
 }
+
+#loginBtn {
+  background-color: rgb(51, 94, 158);
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px;
+}
+#loginBtn:hover {
+background-color: rgb(81, 130, 202);
+cursor: pointer;
+}
+
+/* display page  */
+
+#card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+  border: 2px solid rgb(114, 111, 111, 0.1);
+  padding: 30px;
+  text-align: center;
+}
+
+.card-left {
+  object-position: center;
+}
+
+.card-left img {
+  width: 200px;
+  transition: 500ms;
+
+  /* object-position: center; */
+}
+
+.card-left img:hover {
+  transform: scale(1.05);
+}
+
+.card h2,
+.card h3,
+.card h4 {
+  text-transform: uppercase;
+  line-height: 1.8;
+  font-size: 2em;
+  margin: 0;
+}
+.card p {
+  text-align: left;
+  font-size: 19px;
+  margin: 42px 0;
+  line-height: 2;
+}
+
+
+
+.header {
+  background-color: rgba(153, 153, 153, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-right: 30px;
+}
+.left-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 20px;
+  font-size: 30px;
+  transition: 500ms;
+}
+.left-header a {
+  text-decoration: none;
+  color: black;
+  transition: 300ms;
+}
+.left-header span {
+  padding-right: 42px;
+  padding-left: 42px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+.right-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.right-header a {
+  text-decoration: none;
+}
+
+.right-header i {
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: black;
+  transition: 300ms;
+}
+/* admin */
+
+/* #admin-link {
+  display: none;
+} */
