@@ -1,0 +1,13 @@
+body {
+    margin: none;
+    padding: none;
+}
+
+#shows-main-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+header{
+    background-color: rgb(95, 117, 95);
+}
