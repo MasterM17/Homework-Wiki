@@ -1,19 +1,20 @@
-let shows = [];
+let casts = [];
 
 fetch("https://api.tvmaze.com/shows")
   .then((res) => res.json())
   .then((res) => {
-    shows = res;
-    console.log("ovoj su shows", shows);
-    renderShows(shows);
+    casts = res;
+    console.log("ovoj su shows", casts);
+    renderShows(casts);
   });
 
 function renderShows() {
   const mainShowContainer = document.getElementById("shows-main-container");
   mainShowContainer.innerHTML = "";
 
-  shows.forEach((show) => {
+  casts.forEach((show) => {
     const showCard = document.createElement("div");
+    showCard.style.cursor = "pointer"
 
     const showImg = document.createElement("img");
     showImg.src = show.image.medium;
@@ -32,10 +33,17 @@ function renderShows() {
 
     const showView = document.createElement("a");
     showView.href = `show.html?id=${show.id}`;
-    showView.innerText = "View"
-    showCard.appendChild(showView)
-    // showView.innerHTML += `
-    // <a href='show.html?id=${show.id}'>`;
+    showView.innerText = "";
+    showCard.addEventListener("click", () => {
+        console.log("clicked");
+        window.location.href = `show.html?id=${show.id}`
+        
+        
+        
+    });
+
+    showCard.appendChild(showView);
+    
 
     mainShowContainer.appendChild(showCard);
   });
