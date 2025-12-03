@@ -7,33 +7,46 @@ const id = params.get("id");
 fetch(`https://api.tvmaze.com/shows/${id}`)
   .then((res) => res.json())
   .then((res) => {
-    casts = res;
-    console.log("ovoj su shows", casts);
-    renderShows(casts);
+    shows = res;
+    console.log("ovoj su shows", shows);
+    renderShows(shows);
   });
 
 function renderShows() {
   const mainShowContainer = document.getElementById("shows-main-container");
   mainShowContainer.innerHTML = "";
 
-  let show = casts;
+  let show = shows;
 
   const showCard = document.createElement("div");
 
+  const imgContainer = document.createElement("div")
+  imgContainer.className = "imgContainer"; 
   const showImg = document.createElement("img");
   showImg.src = show.image.medium;
-  showCard.appendChild(showImg);
+  imgContainer.appendChild(showImg);
+  showCard.appendChild(imgContainer)
+
+
+  const textContainer = document.createElement("div")
+  textContainer.className = "textContainer"
   const showTitle = document.createElement("h2");
   showTitle.innerText = show.name;
-  showCard.appendChild(showTitle);
+  textContainer.appendChild(showTitle);
+
+  const showSummary = document.createElement("p")
+  showSummary.innerHTML = show.summary
+  textContainer.appendChild(showSummary)
 
   const showGenr = document.createElement("h3");
   showGenr.innerText = show.genres.join(", ");
-  showCard.appendChild(showGenr);
+  textContainer.appendChild(showGenr);
 
   const showRait = document.createElement("h3");
   showRait.innerText = show.rating.average;
-  showCard.appendChild(showRait);
+  textContainer.appendChild(showRait);
+
+  showCard.appendChild(textContainer)
 
   mainShowContainer.appendChild(showCard);
 }
@@ -75,15 +88,15 @@ function renderEpisodes() {
 fetch(`https://api.tvmaze.com/shows/${id}/cast`)
   .then((res) => res.json())
   .then((res) => {
-    casts = res;
-    console.log("ovoj su cast", casts);
-    renderCasts(casts);
+    shows = res;
+    console.log("ovoj su cast", shows);
+    renderCasts(shows);
   });
 
 function renderCasts() {
   const castContainer = document.getElementById("casts-main-container");
 
-  casts.forEach((cast) => {
+  shows.forEach((cast) => {
     castContainer.innerHTML += `
         <div class="cast-card">
         <img src='${cast.person.image.medium}'/>
