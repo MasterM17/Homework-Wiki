@@ -1,6 +1,6 @@
-let shows = [];
+let currentShow = [];
 let episodes = [];
-let casts = []
+let casts = [];
 
 const params = new URLSearchParams(window.location.search);
 console.log(params);
@@ -10,36 +10,35 @@ const id = params.get("id");
 fetch(`https://api.tvmaze.com/shows/${id}`)
   .then((res) => res.json())
   .then((res) => {
-    shows = res;
-    console.log("ovoj su shows", shows);
-    renderShows(shows);
+    currentShow = res;
+    console.log("ovoj su shows", currentShow);
+    renderShows();
   });
 
 function renderShows() {
   const mainShowContainer = document.getElementById("shows-main-container");
   mainShowContainer.innerHTML = "";
 
-  let show = shows;
+  let show = currentShow;
 
   const showCard = document.createElement("div");
 
-  const imgContainer = document.createElement("div")
-  imgContainer.className = "imgContainer"; 
+  const imgContainer = document.createElement("div");
+  imgContainer.className = "imgContainer";
   const showImg = document.createElement("img");
   showImg.src = show.image.medium;
   imgContainer.appendChild(showImg);
-  showCard.appendChild(imgContainer)
+  showCard.appendChild(imgContainer);
 
-
-  const textContainer = document.createElement("div")
-  textContainer.className = "textContainer"
+  const textContainer = document.createElement("div");
+  textContainer.className = "textContainer";
   const showTitle = document.createElement("h2");
   showTitle.innerText = show.name;
   textContainer.appendChild(showTitle);
 
-  const showSummary = document.createElement("p")
-  showSummary.innerHTML = show.summary
-  textContainer.appendChild(showSummary)
+  const showSummary = document.createElement("p");
+  showSummary.innerHTML = show.summary;
+  textContainer.appendChild(showSummary);
 
   const showGenr = document.createElement("h3");
   showGenr.innerText = show.genres.join(", ");
@@ -49,7 +48,7 @@ function renderShows() {
   showRait.innerText = show.rating.average;
   textContainer.appendChild(showRait);
 
-  showCard.appendChild(textContainer)
+  showCard.appendChild(textContainer);
 
   mainShowContainer.appendChild(showCard);
 }
@@ -76,10 +75,13 @@ function renderEpisodes() {
     episName.innerText = epis.name;
     episCard.appendChild(episName);
 
-    const episSumm = document.createElement("p");//subsctring 
-    episSumm.innerHTML =  epis.summary.substring(3, epis.summary.length - 4)
-    
-    
+    const episSumm = document.createElement("p"); //subsctring
+    if (epis.summary) {
+      episSumm.innerText = epis.summary.replace(/<[^>]*>?/gm, "");
+    } else {
+      episSumm.innerText = "No summary avilable";
+    }
+
     episCard.appendChild(episSumm);
 
     const showRait = document.createElement("h3");
@@ -102,9 +104,12 @@ function renderCasts() {
   const castContainer = document.getElementById("casts-main-container");
 
   casts.forEach((cast) => {
+    const imgSrc =
+      cast.person.image.medium ||
+      "https://via.placeholder.com/210x295?text=No+Image";
     castContainer.innerHTML += `
         <div class="cast-card">
-        <img src='${cast.person.image.medium}'/>
+        <img src='${imgSrc}'/>
         
         <h2>Name: ${cast.person.name}</h2>
         <h2>Character: ${cast.character.name}

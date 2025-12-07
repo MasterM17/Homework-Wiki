@@ -239,15 +239,38 @@ header a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #45b7d1, #3a9fc8);
 }
-
+/* za error */
 #noResultsMessage {
-  display: none; 
+  display: none;
   text-align: center;
   font-size: 1.5rem;
   color: #ff6b6b;
   padding: 20px;
   font-weight: bold;
 }
+
+/* za favorites */
+.favorite-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, color 0.2s ease;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .favorite-icon:hover {
+    transform:  scale(1.2);
+    color: #ffffff;
+  }
+
+  .favorite-icon.is-favorite {
+    color: #ffd700 ;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  }
 
 @media (max-width: 768px) {
   .search-bar-container {
