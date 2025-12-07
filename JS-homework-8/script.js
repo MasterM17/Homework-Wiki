@@ -26,7 +26,7 @@ function toggleFavorite(id) {
     updatedFavorites = [...favorites, id];
     console.log("Ubacen u favorites ", id);
   }
-  localStorage.setItem("myFavorites", JSON.stringify(updatedFavorites))
+  localStorage.setItem("myFavorites", JSON.stringify(updatedFavorites));
 }
 function fetchedDefaultData() {
   fetch("https://api.tvmaze.com/shows")
@@ -42,8 +42,7 @@ function renderShows(showsToRender = currentShow) {
   const mainShowContainer = document.getElementById("shows-main-container");
   mainShowContainer.innerHTML = "";
   const favorites = getFavorites();
-  console.log("ovoj su favorites u renderShows", favorites);//proverka
-  
+  console.log("ovoj su favorites u renderShows", favorites); //proverka
 
   showsToRender.forEach((show) => {
     const showCard = document.createElement("div");
@@ -57,7 +56,7 @@ function renderShows(showsToRender = currentShow) {
       starIcon.classList.add("is-favorite");
     }
     starIcon.addEventListener("click", (e) => {
-      e.stopPropagation();// da nema event bubling
+      e.stopPropagation(); // da nema event bubling
       toggleFavorite(show.id);
       starIcon.classList.toggle("is-favorite");
     });
@@ -100,6 +99,7 @@ function renderShows(showsToRender = currentShow) {
 
 const noResults = document.getElementById("noResultsMessage");
 const mainShowContainer = document.getElementById("shows-main-container");
+
 function filterShows() {
   const searchBarinput = searchBar.value.trim().toLowerCase();
 
@@ -134,7 +134,7 @@ function filterShows() {
 
 // za lajv da pisuemo i debounce
 let debounceTimer;
-
+//search
 searchBar.addEventListener("input", (e) => {
   const searchTerm = e.target.value.trim();
   sessionStorage.setItem("lastSearch", searchTerm);
@@ -150,3 +150,90 @@ document.getElementById("clearButton").addEventListener("click", () => {
   fetchedDefaultData();
   searchBar.focus();
 });
+
+const loginModal = document.getElementById("loginModal");
+const openLoginBtn = document.getElementById("openLoginBtn");
+const closeLoginBtn = document.querySelector(".close-btn");
+const loginForm = document.getElementById("loginForm");
+const userNameInput = document.getElementById("usernameInput");
+const userPassInput = document.getElementById("passwordInput");
+const loginContainer = document.getElementById("loginContainer");
+const registerContainer = document.getElementById("registerContainer");
+const showRegisterBtn = document.getElementById("showRegisterBtn");
+const showLoginBtn = document.getElementById("showLoginBtn");
+const registerForm = document.getElementById("registerForm");
+const regUserInput = document.getElementById("regUsernameInput");
+const regPassInput = document.getElementById("regPasswordInput");
+const loginErrorMsg = document.getElementById("loginErrorMsg");
+
+function updateHeaderForUser(name) {
+  openLoginBtn.innerText = `Hello, ${name}`;
+  openLoginBtn.style.background = "transparent";
+  openLoginBtn.style.color = "#4ecdc4";
+  openLoginBtn.style.border = "1px solid #4ecdc4";
+
+  openLoginBtn.disabled = true; // da izgasimo log in funkcionalnost
+}
+// otvara log in pop up
+openLoginBtn.addEventListener("click", () => {
+  loginModal.style.display = "flex";
+});
+// zatvara log in pop up
+closeLoginBtn.addEventListener("click", () => {
+  loginModal.style.display = "none";
+});
+
+// prebacue u register
+showRegisterBtn.addEventListener("click", () => {
+  loginContainer.style.display = "none";
+  registerContainer.style.display = "block";
+});
+// prebacue u log in
+showLoginBtn.addEventListener("click", () => {
+  registerContainer.style.display = "none";
+  loginContainer.style.display = "block";
+});
+
+// REGISTER
+registerForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const newName = regUserInput.value;
+  const newPass = regPassInput.value;
+
+  localStorage.setItem("registeredUser", newName);
+  localStorage.setItem("registeredPass", newPass);
+
+  alert("Account created! Please log in.");
+  registerContainer.style.display = "none";
+  loginContainer.style.display = "block";
+});
+
+// Log in
+
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const inputUser = userNameInput.value;
+  const inputPass = userPassInput.value;
+
+  const storedUser = localStorage.getItem("registeredUser", inputUser);
+  const storedPass = localStorage.getItem("registeredPass", inputPass);
+
+  if (inputUser === storedUser && inputPass === storedPass) {
+    localStorage.setItem("currentUser", inputUser);
+    updateHeaderForUser(inputUser);
+    loginModal.style.display = "none"; // ugasimo pop up
+  } else {
+    loginErrorMsg.style.display = "block";
+    loginErrorMsg.innerText = "Invalid username or password";
+  }
+});
+function checkLoginStatus() {
+  const currentUser = localStorage.getItem("currentUser");
+  if (currentUser) {
+    updateHeaderForUser(currentUser);
+  }
+}
+
+checkLoginStatus();

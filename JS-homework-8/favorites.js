@@ -1,5 +1,9 @@
 const favoritesContainer = document.getElementById("favorites-main-container");
 const noResults = document.getElementById("noResultsMessage");
+const searchBar = document.getElementById("searchBar");
+const clearBtn = document.getElementById("clearButton");
+
+let allFavoritesData = []; // globalna za favorite lokalno
 
 function getFavorites() {
   const favorites = localStorage.getItem("myFavorites");
@@ -18,6 +22,7 @@ if (favoriteIds.length === 0) {
 
   Promise.all(fetchPromises)
     .then((shows) => {
+      allFavoritesData = shows;
       console.log("favorites fetched", shows);
       renderFavorites(shows);
     })
@@ -26,6 +31,14 @@ if (favoriteIds.length === 0) {
 
 function renderFavorites(shows) {
   favoritesContainer.innerHTML = "";
+
+  if (shows.length === 0 && allFavoritesData.length === 0) {
+    noResults.style.display = "block";
+    noResults.innerText = "No matches found.";
+    return;
+  } else {
+    noResults.style.display = "none";
+  }
 
   currentFavorites = getFavorites();
 
@@ -39,6 +52,7 @@ function renderFavorites(shows) {
 
     starIcon.addEventListener("click", (e) => {
       e.stopPropagation();
+      allFavoritesData = allFavoritesData.filter((item) => item.id !== show.id);
       removeFavorites(show.id);
       showCard.remove(); // brise gu kartu u ovj slucaj, ako  povikamo render f nema da se izbrise deka render ne ni chita od local
 
@@ -87,3 +101,27 @@ function removeFavorites(id) {
   localStorage.setItem("myFavorites", JSON.stringify(updatedFavorites));
   console.log("Izbrisano:", id);
 }
+
+let debounceTimer;
+
+searchBar.addEventListener("input", (e) => {
+  const searchTerm = e.target.value.trim();
+  clearTimeout(debounceTimer);
+
+  debounceTimer = setTimeout(() => {
+    const filteredShows = allFavoritesData.filter((show) =>
+      show.name.toLowerCase().includes(searchTerm)
+    );
+    renderFavorites(filteredShows);
+  }, 300);
+
+  console.log("Filtered Showss e ", filteredShows);
+});
+
+clearBtn.addEventListener("click", () => {
+  searchBar.value = "";
+  renderFavorites(allFavoritesData);
+  console.log("whats left in allfavoritesdata", allFavoritesData);
+
+  searchBar.focus();
+});

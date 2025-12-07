@@ -11,21 +11,43 @@
   </head>
   <body>
     <header>
-      <a href="index.html">Movies</a>
-      <a href="favorites.html">Favorites</a>
+      <div class="brand">
+        <i class="fa-solid fa-film"></i>
+        <span>FoxitMovies</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Movies</a>
+        <a href="favorites.html">Favorites</a>
+      </nav>
+
+      
     </header>
 
     <div class="container">
       <div class="search-bar-container">
         <input id="searchBar" type="search" placeholder="Enter movie name" />
         <button id="clearButton">Clear</button>
-        <!-- napravi go so ID -->
-        <!-- debounce proveri i pravi query do backend namesto lokalno na filter-->
       </div>
       <div id="noResultsMessage"></div>
       <div id="favorites-main-container"></div>
     </div>
+    <footer>
+      <div class="footer-content">
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <p>&copy; 2025 FoxitMovies. All rights reserved.</p>
+        <p class="api-credit">
+          Data provided by
+          <a href="https://www.tvmaze.com/api" target="_blank">TVMaze API</a>
+        </p>
+      </div>
+    </footer>
 
+   
     <script src="favorites.js" defer></script>
   </body>
 </html>
