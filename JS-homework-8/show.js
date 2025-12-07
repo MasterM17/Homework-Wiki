@@ -1,7 +1,10 @@
 let shows = [];
 let episodes = [];
+let casts = []
 
 const params = new URLSearchParams(window.location.search);
+console.log(params);
+
 const id = params.get("id");
 
 fetch(`https://api.tvmaze.com/shows/${id}`)
@@ -73,12 +76,14 @@ function renderEpisodes() {
     episName.innerText = epis.name;
     episCard.appendChild(episName);
 
-    const episSumm = document.createElement("p");
-    episSumm.innerHTML = epis.summary;
+    const episSumm = document.createElement("p");//subsctring 
+    episSumm.innerHTML =  epis.summary.substring(3, epis.summary.length - 4)
+    
+    
     episCard.appendChild(episSumm);
 
     const showRait = document.createElement("h3");
-    showRait.innerText = epis.rating.average;
+    showRait.innerText = "Rating: " + epis.rating.average;
     episCard.appendChild(showRait);
 
     mainEpisodeCont.appendChild(episCard);
@@ -88,15 +93,15 @@ function renderEpisodes() {
 fetch(`https://api.tvmaze.com/shows/${id}/cast`)
   .then((res) => res.json())
   .then((res) => {
-    shows = res;
-    console.log("ovoj su cast", shows);
-    renderCasts(shows);
+    casts = res;
+    console.log("ovoj su cast", casts);
+    renderCasts(casts);
   });
 
 function renderCasts() {
   const castContainer = document.getElementById("casts-main-container");
 
-  shows.forEach((cast) => {
+  casts.forEach((cast) => {
     castContainer.innerHTML += `
         <div class="cast-card">
         <img src='${cast.person.image.medium}'/>

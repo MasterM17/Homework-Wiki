@@ -8,15 +8,21 @@
   <body>
     <header>
       <a href="index.html">Movies</a>
-      <a href="show.html">Shows</a>
+      <a href="favorites.html">Favorites</a>
     </header>
 
     <div class="container">
       <div class="search-bar-container">
         <input id="searchBar" type="search" placeholder="Enter movie name" />
-        <button onclick="filterShows()">Search</button>
+        <button id="clearButton" >Clear</button> 
+        <!-- napravi go so ID -->
+         <!-- debounce proveri i pravi query do backend namesto lokalno na filter-->
+
       </div>
-      <div id="shows-main-container"></div>
+      <div id="noResultsMessage"></div>
+      <div id="shows-main-container">
+        
+      </div>
     </div>
 
     <script src="script.js" defer></script>

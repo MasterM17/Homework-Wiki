@@ -116,7 +116,7 @@ header a:hover {
   margin: 8px 0 24px 0;
   max-height: 200px;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
   opacity: 0.92;
 }
 
@@ -198,6 +198,7 @@ header a:hover {
   max-height: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #episodes-main-container h3 {

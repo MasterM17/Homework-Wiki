@@ -240,7 +240,14 @@ header a:hover {
   background: linear-gradient(135deg, #45b7d1, #3a9fc8);
 }
 
-
+#noResultsMessage {
+  display: none; 
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ff6b6b;
+  padding: 20px;
+  font-weight: bold;
+}
 
 @media (max-width: 768px) {
   .search-bar-container {
