@@ -133,13 +133,39 @@ clearBtn.addEventListener("click", () => {
 
   searchBar.focus();
 });
-function updateHeaderForUser(name) {
-  openLoginBtn.innerText = `Hello, ${name}`;
-  openLoginBtn.style.background = "transparent";
-  openLoginBtn.style.color = "#4ecdc4";
-  openLoginBtn.style.border = "1px solid #4ecdc4";
+function handleLogOut() {
+  localStorage.removeItem("currentUser");
 
-  openLoginBtn.disabled = true; // da izgasimo log in funkcionalnost
+  window.location.href = "index.html";
+}
+function updateHeaderForUser(name) {
+  const oldBtn = document.getElementById("openLoginBtn");
+  const header = document.querySelector("header");
+  oldBtn.remove(); //trzamo ga log in button da ne se vidi
+
+  const menuContainer = document.createElement("div");
+  menuContainer.id = "userMenuContainer";
+  menuContainer.classList.add("dropdown-container");
+  menuContainer.innerHTML = `
+        <button id="userMenuBtn" class="login-btn">
+            <span id="userNameDisplay">Hello, ${name}</span>
+            <i class="fa-solid fa-caret-down"></i>
+        </button>
+        <div id="dropdownMenu" class="dropdown-content">
+            <a href="#" id="logoutLink">Log Out</a>
+        </div>
+    `;
+
+  header.appendChild(menuContainer);
+  document.getElementById("userMenuBtn").addEventListener("click", () => {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
+
+  document.getElementById("logoutLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    handleLogOut();
+  });
 
   if (favLink) {
     favLink.style.display = "block";
@@ -151,5 +177,4 @@ function checkLoginStatus() {
     updateHeaderForUser(currentUser);
   }
 }
-
 checkLoginStatus();
