@@ -52,11 +52,18 @@ function renderShows(showsToRender = currentShow) {
     const starIcon = document.createElement("i");
     starIcon.className = "fa-solid fa-star favorite-icon";
 
-    if (favorites.includes(show.id)) {
+    const currentUser = localStorage.getItem("currentUser");
+
+    if (favorites.includes(show.id) && currentUser) {
       starIcon.classList.add("is-favorite");
     }
     starIcon.addEventListener("click", (e) => {
       e.stopPropagation(); // da nema event bubling
+
+      if (!currentUser) {
+        loginModal.style.display = "flex";
+        return;
+      }
       toggleFavorite(show.id);
       starIcon.classList.toggle("is-favorite");
     });
@@ -165,7 +172,8 @@ const registerForm = document.getElementById("registerForm");
 const regUserInput = document.getElementById("regUsernameInput");
 const regPassInput = document.getElementById("regPasswordInput");
 const loginErrorMsg = document.getElementById("loginErrorMsg");
-
+const favLink = document.getElementById("favLink");
+// promena na header ime i favorites
 function updateHeaderForUser(name) {
   openLoginBtn.innerText = `Hello, ${name}`;
   openLoginBtn.style.background = "transparent";
@@ -173,6 +181,10 @@ function updateHeaderForUser(name) {
   openLoginBtn.style.border = "1px solid #4ecdc4";
 
   openLoginBtn.disabled = true; // da izgasimo log in funkcionalnost
+
+  if (favLink) {
+    favLink.style.display = "block";
+  }
 }
 // otvara log in pop up
 openLoginBtn.addEventListener("click", () => {
@@ -194,6 +206,11 @@ showLoginBtn.addEventListener("click", () => {
   loginContainer.style.display = "block";
 });
 
+function getALlUsers() {
+  const usersData = localStorage.getItem("users");
+  return usersData ? JSON.parse(usersData) : [];
+}
+
 // REGISTER
 registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -201,8 +218,10 @@ registerForm.addEventListener("submit", (e) => {
   const newName = regUserInput.value;
   const newPass = regPassInput.value;
 
-  localStorage.setItem("registeredUser", newName);
-  localStorage.setItem("registeredPass", newPass);
+  const allUsers = getALlUsers();
+
+  allUsers.push({ name: newName, pass: newPass });
+  localStorage.setItem("users", JSON.stringify(allUsers));
 
   alert("Account created! Please log in.");
   registerContainer.style.display = "none";
@@ -217,10 +236,13 @@ loginForm.addEventListener("submit", (e) => {
   const inputUser = userNameInput.value;
   const inputPass = userPassInput.value;
 
-  const storedUser = localStorage.getItem("registeredUser", inputUser);
-  const storedPass = localStorage.getItem("registeredPass", inputPass);
+  const allUsers = getALlUsers();
 
-  if (inputUser === storedUser && inputPass === storedPass) {
+  const userFound = allUsers.find(
+    (user) => user.name === inputUser && user.pass === inputPass
+  );
+
+  if (userFound) {
     localStorage.setItem("currentUser", inputUser);
     updateHeaderForUser(inputUser);
     loginModal.style.display = "none"; // ugasimo pop up

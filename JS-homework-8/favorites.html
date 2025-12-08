@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>FoxitMovies - My Favorites</title>
     <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/bd22e98160.js"
@@ -18,20 +18,25 @@
 
       <nav class="nav-links">
         <a href="index.html">Movies</a>
-        <a href="favorites.html">Favorites</a>
+        <a id="favLink" href="favorites.html" style="display: block">Favorites</a>
       </nav>
 
-      
+      <button id="openLoginBtn" class="login-btn">Log In</button>
     </header>
 
     <div class="container">
+      
       <div class="search-bar-container">
-        <input id="searchBar" type="search" placeholder="Enter movie name" />
+        <input id="searchBar" type="search" placeholder="Search within your collection" />
         <button id="clearButton">Clear</button>
       </div>
-      <div id="noResultsMessage"></div>
-      <div id="favorites-main-container"></div>
+
+      <div id="noResultsMessage" style="text-align: center; margin-top: 50px;"></div>
+      
+      <div id="favorites-main-container">
+        </div>
     </div>
+
     <footer>
       <div class="footer-content">
         <div class="social-links">
@@ -47,7 +52,64 @@
       </div>
     </footer>
 
-   
-    <script src="favorites.js" defer></script>
+    <div id="loginModal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+
+        <div id="loginContainer">
+          <h2>Welcome Back</h2>
+          <p>Login to your FoxitMovies account</p>
+
+          <form id="loginForm">
+            <div class="input-group">
+              <label>Username</label>
+              <input type="text" id="usernameInput" placeholder="Enter your name" required />
+            </div>
+
+            <div class="input-group">
+              <label>Password</label>
+              <input type="password" id="passwordInput" placeholder="••••••••" required />
+            </div>
+
+            <p id="loginErrorMsg" style="color: #ff6b6b; font-size: 0.9rem; display: none; margin-bottom: 10px;">
+              Invalid username or password!
+            </p>
+
+            <button type="submit" class="login-submit-btn">Log In</button>
+
+            <p style="margin-top: 15px; color: #a0a0c0">
+              Don't have an account?
+              <span id="showRegisterBtn" style="color: #4ecdc4; cursor: pointer; font-weight: bold;">Register</span>
+            </p>
+          </form>
+        </div>
+
+        <div id="registerContainer" style="display: none">
+          <h2>Create Account</h2>
+          <p>Join FoxitMovies today</p>
+
+          <form id="registerForm">
+            <div class="input-group">
+              <label>Choose Username</label>
+              <input type="text" id="regUsernameInput" placeholder="Pick a name" required />
+            </div>
+
+            <div class="input-group">
+              <label>Choose Password</label>
+              <input type="password" id="regPasswordInput" placeholder="Create password" required />
+            </div>
+
+            <button type="submit" class="login-submit-btn">Register</button>
+
+            <p style="margin-top: 15px; color: #a0a0c0">
+              Already have an account?
+              <span id="showLoginBtn" style="color: #4ecdc4; cursor: pointer; font-weight: bold;">Log In</span>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="favorites.js"></script>
   </body>
 </html>

@@ -32,9 +32,14 @@ if (favoriteIds.length === 0) {
 function renderFavorites(shows) {
   favoritesContainer.innerHTML = "";
 
-  if (shows.length === 0 && allFavoritesData.length === 0) {
+  if (shows.length === 0) {
     noResults.style.display = "block";
-    noResults.innerText = "No matches found.";
+
+    if (allFavoritesData.length === 0) {
+      noResults.innerText = "No favorites yet! Go add some stars.";
+    } else {
+      noResults.innerText = "No matches found.";
+    }
     return;
   } else {
     noResults.style.display = "none";
@@ -104,19 +109,22 @@ function removeFavorites(id) {
 
 let debounceTimer;
 
-searchBar.addEventListener("input", (e) => {
-  const searchTerm = e.target.value.trim();
-  clearTimeout(debounceTimer);
+searchBar.addEventListener(
+  "input",
+  (e) => {
+    const searchTerm = e.target.value.trim();
+    clearTimeout(debounceTimer);
 
-  debounceTimer = setTimeout(() => {
-    const filteredShows = allFavoritesData.filter((show) =>
-      show.name.toLowerCase().includes(searchTerm)
-    );
-    renderFavorites(filteredShows);
-  }, 300);
-
-  console.log("Filtered Showss e ", filteredShows);
-});
+    debounceTimer = setTimeout(() => {
+      const filteredShows = allFavoritesData.filter((show) =>
+        show.name.toLowerCase().includes(searchTerm)
+      );
+      renderFavorites(filteredShows);
+      console.log("Filtered Showss e ", filteredShows);
+    });
+  },
+  300
+);
 
 clearBtn.addEventListener("click", () => {
   searchBar.value = "";
@@ -125,3 +133,23 @@ clearBtn.addEventListener("click", () => {
 
   searchBar.focus();
 });
+function updateHeaderForUser(name) {
+  openLoginBtn.innerText = `Hello, ${name}`;
+  openLoginBtn.style.background = "transparent";
+  openLoginBtn.style.color = "#4ecdc4";
+  openLoginBtn.style.border = "1px solid #4ecdc4";
+
+  openLoginBtn.disabled = true; // da izgasimo log in funkcionalnost
+
+  if (favLink) {
+    favLink.style.display = "block";
+  }
+}
+function checkLoginStatus() {
+  const currentUser = localStorage.getItem("currentUser");
+  if (currentUser) {
+    updateHeaderForUser(currentUser);
+  }
+}
+
+checkLoginStatus();
