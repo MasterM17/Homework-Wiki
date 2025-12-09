@@ -1,3 +1,8 @@
+const currentUser = localStorage.getItem("currentUser");
+if(!currentUser) {
+  window.location.href = "index.html"
+}
+
 const favoritesContainer = document.getElementById("favorites-main-container");
 const noResults = document.getElementById("noResultsMessage");
 const searchBar = document.getElementById("searchBar");
@@ -82,11 +87,11 @@ function renderFavorites(shows) {
     showCard.appendChild(showTitle);
 
     const showGenr = document.createElement("h3");
-    showGenr.innerText = show.genres.join(", ");
+    showGenr.innerText = `Genres: ${show.genres.join(", ")}`;
     showCard.appendChild(showGenr);
 
     const showRait = document.createElement("h3");
-    showRait.innerText = "Rating: " + show.rating.average;
+    showRait.innerText = `Rating: ${show.rating.average}`
     showCard.appendChild(showRait);
 
     showCard.addEventListener("click", () => {
@@ -172,7 +177,7 @@ function updateHeaderForUser(name) {
   }
 }
 function checkLoginStatus() {
-  const currentUser = localStorage.getItem("currentUser");
+  
   if (currentUser) {
     updateHeaderForUser(currentUser);
   }

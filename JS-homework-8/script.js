@@ -80,11 +80,11 @@ function renderShows(showsToRender = currentShow) {
     showCard.appendChild(showTitle);
 
     const showGenr = document.createElement("h3");
-    showGenr.innerText = show.genres.join(", ");
+    showGenr.innerText = `Genres: ${show.genres.join(", ")}`;
     showCard.appendChild(showGenr);
 
     const showRait = document.createElement("h3");
-    showRait.innerText = "Rating: " + show.rating.average;
+    showRait.innerText = `Rating: ${show.rating.average}`
     showCard.appendChild(showRait);
 
     // const showView = document.createElement("a");
@@ -203,7 +203,7 @@ function updateHeaderForUser(name) {
   header.appendChild(menuContainer);
   document.getElementById("userMenuBtn").addEventListener("click", () => {
     const menu = document.getElementById("dropdownMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    menu.style.display = menu.style.display === "block" ? "none" : "block";// dropdown dali ke e vidljiv ili ne
   });
 
   document.getElementById("logoutLink").addEventListener("click", (e) => {

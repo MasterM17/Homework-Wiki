@@ -9,7 +9,7 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 40px;
   padding: 24px 20px;
   background: rgba(30, 30, 46, 0.95);
@@ -24,20 +24,105 @@ header {
 header a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.3rem;
-  font-weight: 700;
-  padding: 12px 24px;
-  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 12px;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(69, 183, 209, 0.1));
-  border: 1px solid rgba(78, 205, 196, 0.2);
+  border: 1px solid transparent;
 }
 
 header a:hover {
-  background: linear-gradient(135deg, rgba(78, 205, 196, 0.3), rgba(69, 183, 209, 0.3));
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(78, 205, 196, 0.3);
+  background: rgba(78, 205, 196, 0.15);
+  border-color: rgba(78, 205, 196, 0.3);
+  color: #4ecdc4;
 }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #4ecdc4;
+  cursor: pointer;
+}
+.brand span {
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.login-btn {
+  text-decoration: none;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+  color: #1e1e2e;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.5);
+  background: linear-gradient(135deg, #45b7d1, #3a9fc8);
+  color: #1e1e2e; 
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.dropdown-container {
+  position: relative; /* Essential: Allows the menu to position itself */
+}
+#userMenuBtn {
+  /* Reuse your .login-btn styling, but make it look like a status */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent !important;
+  border: 1px solid #4ecdc4 !important;
+  color: #4ecdc4 !important;
+  font-weight: 600;
+  transition: none; /* Turn off hover animations for the button container */
+}
+/* The actual menu box */
+.dropdown-content {
+  display: none; /* HIDDEN BY DEFAULT */
+  position: absolute;
+  top: 100%; /* Position right below the button */
+  right: 0;
+  min-width: 150px;
+  background: #161625; /* Dark background */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  z-index: 200;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.dropdown-content a:hover {
+  background: #2a2a3e; /* Slight hover accent */
+  color: #4ecdc4;
+}
+
+
+
 #shows-main-container .imgContainer {
   display: flex;
   justify-content: center;
@@ -53,11 +138,16 @@ header a:hover {
   max-width: 1200px;
   margin: 40px auto;
   padding: 40px 32px;
-  background: linear-gradient(145deg, rgba(30, 30, 46, 0.9), rgba(42, 42, 62, 0.9));
+  background: linear-gradient(
+    145deg,
+    rgba(30, 30, 46, 0.9),
+    rgba(42, 42, 62, 0.9)
+  );
   border-radius: 32px;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
   display: grid;
@@ -92,7 +182,8 @@ header a:hover {
 
 #shows-main-container:hover img {
   transform: scale(1.02);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 12px 32px rgba(78, 205, 196, 0.3);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6),
+    0 12px 32px rgba(78, 205, 196, 0.3);
 }
 
 /* Show title */
@@ -121,7 +212,7 @@ header a:hover {
 }
 
 #shows-main-container p::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -146,7 +237,7 @@ header a:hover {
 }
 
 #shows-main-container h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -212,6 +303,7 @@ header a:hover {
   margin-top: 12px;
 }
 
+
 /* Cast container */
 #casts-main-container {
   max-width: 1400px;
@@ -257,7 +349,171 @@ header a:hover {
   font-size: 0.9rem;
   color: #aaa;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: #1e1e2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #45b7d1, #3a9fc8);
+}
+/* LOG IN  */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 35, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+.modal-content {
+  background: linear-gradient(145deg, #1e1e2e, #2a2a3e);
+  padding: 40px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  text-align: center;
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  color: #a0a0c0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.close-btn:hover {
+  color: #ff6b6b;
+}
+
+/* Typography inside Modal */
+.modal-content h2 {
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: #a0a0c0;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+/* Form Styling */
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: #4ecdc4;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #161625;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box; /* Prevents padding from breaking width */
+}
+
+.input-group input:focus {
+  border-color: #4ecdc4;
+}
+
+.login-submit-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+  border: none;
+  border-radius: 12px;
+  color: #1e1e2e;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.login-submit-btn:hover {
+  transform: translateY(-2px);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* footer */
+
+footer {
+  margin-top: 60px; /* Push it down from content */
+  background: #161625; /* Darker than body */
+  padding: 40px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #a0a0c0;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.social-links a {
+  color: #a0a0c0;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #4ecdc4;
+  transform: translateY(-3px);
+}
+
+.api-credit a {
+  color: #45b7d1;
+  text-decoration: none;
+}
 /* Responsive */
 @media (max-width: 900px) {
   #shows-main-container {
@@ -265,37 +521,54 @@ header a:hover {
     margin: 24px auto;
     grid-template-columns: 1fr;
   }
-  
+
   #shows-main-container > div {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   #shows-main-container img {
     height: 400px;
     max-width: 100%;
   }
-  
+
   #shows-main-container h2 {
     font-size: 2.2rem;
   }
-  
+
   #episodes-main-container {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
-  
+
   #casts-main-container {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
 }
+@media (max-width: 768px) {
+  header {
+    padding: 16px 20px;
+  }
 
+  .brand span {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  header a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
 @media (max-width: 480px) {
   #shows-main-container,
   #episodes-main-container,
   #casts-main-container {
     padding: 0 16px;
   }
-  
+
   #shows-main-container {
     padding: 20px 16px;
   }
