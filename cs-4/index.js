@@ -88,6 +88,7 @@ const userReport = async (userID) => {
     await fileWrite(fielName, data);
 
     console.log(`Successfully generated report for ${user.name}`);
+    return fielName;
   } catch (err) {
     console.log("Error generaiting report:", err);
   }
@@ -103,4 +104,30 @@ const generateAllReports = async (idList) => {
   }
 };
 
-generateAllReports([1, 5, 3]);
+// generateAllReports([1, 5, 3]);
+
+const runBatch = async () => {
+  const ids = [1, 2, 3];
+  let nameFileCreated = "";
+
+  for (const id of ids) {
+    console.log(`\n--- Starting ID: ${id} ---`);
+    results = await userReport(id);
+    if (results) {
+      nameFileCreated = results;
+      console.log(`Just finished creating: ${nameFileCreated}`);
+    }
+  }
+  if (nameFileCreated) {
+    console.log("\n--- Reading ---");
+
+    try {
+      const data = await fileRead(`${nameFileCreated}`);
+      console.log(`${nameFileCreated} reports says`, data);
+    } catch (err) {
+      console.log("Could not read verificaiton file:", err);
+    }
+  } else console.log("No files were created successfully.");
+};
+
+runBatch();
