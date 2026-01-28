@@ -72,6 +72,13 @@ const runAllDomasno = async () => {
 
 // runAllDomasno();
 
+//? async function that:
+//? Takes a User ID as an input.
+//? Gets the User first.
+//? Then gets the Grades for that specific user.
+//? Calculates the average grade (sum divided by count).
+//? Saves a file named Report_Bojan.txt that says: "Bojan has an average grade of 9.25."
+
 const userReport = async (userID) => {
   try {
     const user = await getUser(userID);
@@ -106,6 +113,11 @@ const generateAllReports = async (idList) => {
 
 // generateAllReports([1, 5, 3]);
 
+//? Take an array of IDs: [1, 2, 3].
+//? Use a for...of loop to iterate through them.
+//? Inside the loop, await userReport(id).
+//? After the loop is completely finished, use your fileRead function to read one of the reports (e.g., Report_Bojan.txt) and console.log its contents to the terminal.
+
 const runBatch = async () => {
   const ids = [1, 2, 3];
   let nameFileCreated = "";
@@ -113,12 +125,12 @@ const runBatch = async () => {
   for (const id of ids) {
     console.log(`\n--- Starting ID: ${id} ---`);
     results = await userReport(id);
-    if (results) {
+    if (results) { // stavimo check za da ne vrati undefined, samo ako e pozitivno produzue
       nameFileCreated = results;
       console.log(`Just finished creating: ${nameFileCreated}`);
     }
   }
-  if (nameFileCreated) {
+  if (nameFileCreated) { // jos edn check da bidemo sigurni
     console.log("\n--- Reading ---");
 
     try {
