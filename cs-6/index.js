@@ -23,7 +23,7 @@ const handler = (req, res) => {
       const samoglaskiCount = name
         .toLowerCase()
         .split("")
-        .filter((char) => samoglaskiNiza.includes(char).length);
+        .filter((char) => samoglaskiNiza.includes(char)).length;
       const soglaskiCount = karakteri - samoglaskiCount;
 
       res.end(
