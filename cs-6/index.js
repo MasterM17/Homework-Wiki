@@ -25,10 +25,21 @@ const handler = (req, res) => {
         .split("")
         .filter((char) => samoglaskiNiza.includes(char)).length;
       const soglaskiCount = karakteri - samoglaskiCount;
-
-      res.end(
-        `Zdravo, ova e profilot na ${name}. Parno: ${eParno}, Karakteri: ${karakteri}, Soglaski: ${soglaskiCount}, Samoglaski: ${samoglaskiCount}`,
-      );
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" }); // definirame pravila za browserot
+      // res.end(
+      //   `Zdravo, ova e profilot na ${name}. Parno: ${eParno}, Karakteri: ${karakteri}, Soglaski: ${soglaskiCount}, Samoglaski: ${samoglaskiCount}`,
+      // );
+      res.end(`
+  <div style="font-family: sans-serif; padding: 20px; border: 2px solid #333; border-radius: 10px; max-width: 400px;">
+    <h1 style="color: #007bff;">Profil na ${name}</h1>
+    <ul style="list-style: none; padding: 0; line-height: 2;">
+      <li><strong>Karakteri:</strong> ${karakteri}</li>
+      <li><strong>Parno:</strong> ${eParno}</li>
+      <li><strong>Samoglaski:</strong> ${samoglaskiCount}</li>
+      <li><strong>Soglaski:</strong> ${soglaskiCount}</li>
+    </ul>
+  </div>
+`);
     } else {
       res.end("Ve molam vnesete ime na profilot po kosata crta");
     }
