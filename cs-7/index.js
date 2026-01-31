@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
+const readWrite = require("./readWrite.js");
 
-const products = require("./products.json"); 
+const products = require("./products.json");
 
 app.get("/products", (req, res) => {
   res.json(products);
