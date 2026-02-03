@@ -9,7 +9,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/calculator", calculator.getMassCalculator);
-app.post("/calculator", calculator.postMassCalculator);
+app.post("/calculator", calculator.postMassCalculator); // prethodno tuj pisuesmo celu logiku
 
 app.listen(11000, (err) => {
   if (err) return console.log(err.message);
