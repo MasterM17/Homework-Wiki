@@ -40,6 +40,11 @@ app.get("/products/cheaper-than/:priceNum", (req, res) => {
   res.json(result);
 });
 
+app.get("/newfile/:filename/:data", (req, res) => {
+  readWrite.fileWrite(req.params.filename, req.params.data);
+  res.send(`Sucesfull wrote ${req.params.filename}`);
+});
+
 //server
 
 app.listen(3000, (err) => {
