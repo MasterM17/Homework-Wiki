@@ -1,111 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Physics Lab: Force Calculator</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            border-top: 5px solid #0056b3;
-        }
-        h2 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .formula-box {
-            background-color: #e7f1ff;
-            color: #0056b3;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #555;
-        }
-        input {
-            padding: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        input:focus {
-            outline: none;
-            border-color: #0056b3;
-            box-shadow: 0 0 0 2px rgba(0,86,179,0.2);
-        }
-        button {
-            background-color: #0056b3;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #004494;
-        }
-        .result-section {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px dashed #ccc;
-            text-align: center;
-        }
-        .result-value {
-            font-size: 1.5rem;
-            color: #28a745;
-            font-weight: bold;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        border-top: 5px solid #0056b3;
+      }
+      h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .formula-box {
+        background-color: #e7f1ff;
+        color: #0056b3;
+        padding: 10px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #555;
+      }
+      input {
+        padding: 12px;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      input:focus {
+        outline: none;
+        border-color: #0056b3;
+        box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+      }
+      button {
+        background-color: #0056b3;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #004494;
+      }
+      .result-section {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px dashed #ccc;
+        text-align: center;
+      }
+      .result-value {
+        font-size: 1.5rem;
+        color: #28a745;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Newton's Second Law</h2>
+      <div class="formula-box">F = m × a</div>
 
-<div class="container">
-    <h2>Newton's Second Law</h2>
-    <div class="formula-box">F = m × a</div>
+      <form action="/calculator" method="POST">
+        <label for="calcType">Choose Calculation:</label>
+        <select name="calcType">
+          {{calcOptions}}
+          <option value="force">Force (F = m * a )</option>
+          <option value="force">Momentum (p = m * v)</option>
+        </select>
+        <label for="mass">{{label1}}</label>
+        <input
+          type="number"
+          step="any"
+          name="input1"
+          id="mass"
+          placeholder="Enter"
+          required
+        />
 
-    <form action="/calculator" method="POST">
-        <label for="mass">Mass (kg):</label>
-        <input type="number" step="any" name="mass" id="mass" placeholder="Enter mass..." required>
+        <label for="acceleration">{{label2}}</label>
+        <input
+          type="number"
+          step="any"
+          name="input2"
+          id="acceleration"
+          placeholder="Enter"
+          required
+        />
 
-        <label for="acceleration">Acceleration (m/s²):</label>
-        <input type="number" step="any" name="acceleration" id="acceleration" placeholder="Enter acceleration..." required>
+        <button type="submit">Calculate</button>
+      </form>
 
-        <button type="submit">Calculate Force</button>
-    </form>
-
-    <div class="result-section">
-        <p>Calculated Force:</p>
+      <div class="result-section">
+        <p>Calculated {{title}}:</p>
         <div class="result-value">{{result}}</div>
+      </div>
     </div>
-</div>
-
-</body>
+  </body>
 </html>
