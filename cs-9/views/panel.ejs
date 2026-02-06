@@ -1,0 +1,45 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div class="panel-container">
+      <form action="/panel" method="post">
+        <label for="ime">Ime</label>
+      <input type="text" name="ime" id="ime" placeholder="Vnesi" required />
+      <label for="prezime">Prezime</label>
+      <input type="text" name="prezime" id="prezime" placeholder="Vnesi" required />
+      <label for="grad">Grad</label>
+      <input type="text" name="grad" id="mass" placeholder="Vnesi" required />
+      <input type="submit" value="Dodadi Student" />
+      </form>
+    </div>
+    <div class="render-container">
+      <table>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Grad</th>
+          <th>Opcija</th>
+        </tr>
+        
+          <% studenti.forEach(stud => { %>
+
+            <tr>
+              <td><%= stud.ime %></td>
+              <td><%= stud.prezime %></td>
+              <td><%= stud.grad %></td>
+              <td><form action="/delete/<%= stud.id %>" method="post">
+                <button type="submit" onclick="return confirm ('Are you sure?')">Delete</button>
+              </form></td>
+            </tr>
+           
+          <% }) %>
+        
+      </table>
+    </div>
+  </body>
+</html>
