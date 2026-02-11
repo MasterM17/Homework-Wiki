@@ -10,6 +10,7 @@ const readWrite = require("./utils/fileReadWrite.js");
 const {
   postPannel,
   deleteStudent,
+  getPannel,
 } = require("./controller/pannelController.js");
 
 app.set("view engine", "ejs");
@@ -18,18 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const dataPath = path.join(__dirname, "/model/data.json");
 
-app.get("/panel", async (req, res) => {
-  try {
-    const dataRead = await readWrite.fileRead(dataPath);
-    const students = JSON.parse(dataRead);
-    res.render("panel", {
-      studenti: students,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Greshka pri chitanje na podatocite.");
-  }
-});
+app.get("/panel", getPannel);
 
 app.post("/panel", postPannel);
 

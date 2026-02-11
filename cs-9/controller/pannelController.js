@@ -4,6 +4,19 @@ const readWrite = require("../utils/fileReadWrite.js");
 
 const pannelPath = path.join(__dirname, "../model/data.json");
 
+const getPannel = async (req, res) => {
+  try {
+    const dataRead = await readWrite.fileRead(pannelPath);
+    const students = JSON.parse(dataRead);
+    res.render("panel", {
+      studenti: students,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Greshka pri chitanje na podatocite.");
+  }
+};
+
 const postPannel = async (req, res) => {
   try {
     const dataRead = await readWrite.fileRead(pannelPath);
@@ -32,7 +45,7 @@ const deleteStudent = async (req, res) => {
     const dataRead = await readWrite.fileRead(pannelPath);
     let students = JSON.parse(dataRead);
 
-    students = students.filter((stud) => String(stud.id) !== String(studentID));
+    students = students.filter((stud) => stud.id !== studentID);
 
     await readWrite.fileWrite(pannelPath, JSON.stringify(students, null, 2));
     res.redirect("/panel");
@@ -45,4 +58,5 @@ const deleteStudent = async (req, res) => {
 module.exports = {
   postPannel,
   deleteStudent,
+  getPannel,
 };
