@@ -8,16 +8,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose
-  .connect(
-    "mongodb+srv://MasterM17_db_user:Rx4xksriqHCSPe@cluster0.hwfkhyb.mongodb.net/semos1?appName=Cluster0",
-  )
-  .then(() => {
-    console.log("Sucesfully connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+
 app.get("/api/v1/landing", getLanding);
 app.get("/api/v1/products", allProducts);
 app.post("/api/v1/products", addProduct);
