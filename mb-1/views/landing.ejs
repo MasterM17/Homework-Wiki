@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machines</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+
+    <main>
+      <h1>Welcome to AgriStore</h1>
+      <% products.forEach(item => { %>
+       <div class="card">
+        <h2><%= item.ime %></h2>
+        <p><%= item.kategorija %></p>
+        <p><%= item.opis %></p>
+        <p>Cena: <%= item.cena %></p>
+      </div>
+      <% }) %>
+    </main>
+
+    
+  </body>
+</html>
