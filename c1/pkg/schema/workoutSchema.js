@@ -33,6 +33,13 @@ const workoutSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  image: {
+    type: String,
+    default: "default-workout.jpg",
+  },
+  images: {
+    type: [String],
+  },
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);

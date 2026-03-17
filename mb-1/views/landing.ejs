@@ -10,7 +10,13 @@
     <%- include('partials/navbar') %>
 
     <main>
-      <h1>Welcome to AgriStore</h1>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>
+            Welcome to AgriStore
+          </h1>
+        </div>
+      </section>
       <% products.forEach(item => { %>
        <div class="card">
         <h2><%= item.ime %></h2>
@@ -22,5 +28,6 @@
     </main>
 
     
+    <%- include('partials/footer') %>
   </body>
 </html>

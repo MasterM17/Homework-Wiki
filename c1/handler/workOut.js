@@ -1,7 +1,40 @@
 const Workout = require("../pkg/schema/workoutSchema");
 
+const multer = require("multer");
+const uuid = require("uuid");
+
+const imageId = uuid.v4();
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/workouts");
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `workout-${imageId}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new Error("file type not supported"), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+const uploadWorkoutPhoto = upload.single("image");
+
 const createWorkout = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
+
     const workout = await Workout.create(req.body);
     res.status(201).json({
       status: "success",
@@ -57,6 +90,10 @@ const getWorkout = async (req, res) => {
 
 const updWorkout = async (req, res) => {
   try {
+    if (req.files && req.files.length > 0) {
+      const fileNames = req.files.map((file) => file.filename);
+      req.body.images = fileNames;
+    }
     const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, {
       new: true, // pod default ne vrakja nazad promene
       runValidators: true, // pod default u updejt ne proverue validatori
@@ -100,4 +137,5 @@ module.exports = {
   getWorkouts,
   updWorkout,
   deletWorkout,
+  uploadWorkoutPhoto,
 };

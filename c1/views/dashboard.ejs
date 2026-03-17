@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="/css/style.css" />
+    <%- include('partials/header') %>
+    <main>
+       <div class="main-container">
+<section class="search-section">
+            <form action="/dashboard" method="GET" class="filter-controls">
+  <input type="text" name="search" value="<%= currentSearch %>" placeholder="Search exercises...">
+
+ <select name="muscleGroup">
+  <option value="all">All Muscles</option>
+  
+  <% categories.forEach(cat => { %>
+    <option 
+      value="<%= cat %>" 
+      <%= currentFilter === cat ? 'selected' : '' %>
+    >
+      <%= cat %>
+    </option>
+  <% }) %>
+</select>
+
+  <button type="submit">Apply</button>
+  <a href="/dashboard">Clear All</a>
+</form>
+          </section>
+<section class="add-workout-section">
+  <h2>Log New Workout</h2>
+  <form id="add-workout-form" >
+    <div class="form-exercise-name">
+      <label for="excerciseName">Exercise Name</label>
+      <input type="text" id="excerciseName" name="excerciseName" placeholder="e.g. Bench Press" required>
+    </div>
+
+    <div class="form-group">
+      <label for="muscleGroup">Muscle Group</label>
+      <select id="muscleGroup" name="muscleGroup" required>
+  <option value="">Select Muscle...</option>
+  
+  <% muscleGroups.forEach(group => { %>
+    <option value="<%= group %>"><%= group %></option>
+  <% }) %>
+</select>
+    </div>
+
+    <div class="stats-row">
+      <div class="form-group">
+        <label for="weight">Weight (KG)</label>
+        <input type="number" id="weight" name="weight" required min="0">
+      </div>
+      <div class="form-group">
+        <label for="reps">Reps</label>
+        <input type="number" id="reps" name="reps" required min="1">
+      </div>
+    </div>
+<div class="form-photo">
+    <label for="image">Workout Photo</label>
+    <input type="file" id="image" name="image" accept="image/*">
+  </div>
+    <button type="submit" class="btn-submit">Add Workout</button>
+  </form>
+</section>
+<section id="workouts" class="workouts-section">
+      <div class="workouts-header"><h2>All Workouts</h2></div>
+      
+      <div class="workouts-container">
+  <% workouts.forEach(work => { %>
+    <div class="workouts-card">
+      <div class="card-header">
+        <h3 class="category"><%= work.muscleGroup %></h3>
+      </div>
+
+      <div class="card-image">
+        <img src="/images/workouts/<%= work.image || 'default-workout.jpg' %>" 
+             alt="<%= work.excerciseName %>" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+      </div>
+
+      <h4><%= work.excerciseName %></h4>
+      
+      <div class="card-stats">
+        <div class="stat-item">
+          <span class="weight"><%= work.weight %> KG</span>
+        </div>
+        <div class="stat-item">
+          <span class="repetitions"><%= work.reps %> Reps</span>
+        </div>
+      </div>
+
+      <% if (work.notes) { %>
+        <div class="card-footer">
+          <p><%= work.notes %></p>
+        </div>
+      <% } %>
+      
+    </div>
+  <% }) %>
+</div>
+    </section>
+       </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/addWorkout.js"></script>
+  </body>
+</html>
