@@ -5,6 +5,7 @@ const { promisify } = require("util");
 const dotenv = require("dotenv");
 const { createSendToken } = require("./createSendTokenHandler");
 const sendEmail = require("./emailHandler");
+const crypto = require("crypto");
 
 const signup = async (req, res) => {
   try {
@@ -71,6 +72,70 @@ const login = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(400).json({
+        status: "fail",
+        message: "No user with that email",
+      });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    user.passwordResetToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+    user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+    await user.save({ validateBeforeSave: false });
+
+    const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/resetPassword/${token}`;
+    const message = `Forgot your password? Submit a PATCH request with your new password to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
+
+    await sendEmail.sendEmail({
+      email: user.email,
+      subject: `Your password reset token (valid for 10 min)`,
+      message: message,
+    });
+
+    res.status(200).json({
+      status: "sucess",
+      message: "Token sent to email",
+    });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const token = req.params.token;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res.status(500).send("token is invalid or expired");
+    }
+
+    user.password = req.body.password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    await user.save();
+
+    createSendToken(user, 201, res);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 const protect = async (req, res, next) => {
   try {
     // console.log(req.headers);
@@ -120,4 +185,6 @@ module.exports = {
   login,
   protect,
   restrict,
+  forgotPassword,
+  resetPassword,
 };
