@@ -13,11 +13,11 @@ const getLoginForm = (req, res) => {
 const getDashboard = async (req, res) => {
   try {
     const categories = await Workout.distinct("muscleGroup");
-    const muscleGroup = Workout.schema.path('muscleGroup').enumValues;
+    const muscleGroup = Workout.schema.path("muscleGroup").enumValues;
     // console.log(muscleGroup);
-    
+
     let query = {};
-   
+
     if (req.query.search) {
       query.$or = [
         {
@@ -44,7 +44,18 @@ const getDashboard = async (req, res) => {
   }
 };
 
+const getForgetPass = (req, res) => {
+  try {
+    res.status(200).render("forgotPassword", {
+      status: "sucess",
+    });
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   getLoginForm,
   getDashboard,
+  getForgetPass,
 };

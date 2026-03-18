@@ -49,10 +49,14 @@ app.delete(
 
 app.post("/api/v1/signup", auth.signup);
 app.post("/api/v1/login", auth.login);
+app.post("/api/v1/forgotPassword", auth.forgotPassword);
+app.patch("/api/v1/resetPassword/:token", auth.resetPassword);
 
 //VIEW
 app.get("/login", view.getLoginForm);
 app.get("/dashboard", auth.protect, view.getDashboard);
+app.get("/forgotPassword", view.getForgetPass);
+
 
 const port = process.env.PORT;
 

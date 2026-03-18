@@ -24,10 +24,12 @@ const userSchema = new mongoose.Schema({
     required: [true, "Must have a password"],
     minLenght: [4, "Password must be at least 4 characters"],
   },
+  passwordResetToken: String,
+  passwordResetExpires: Date,
 });
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return ;
 
   this.password = await bcrypt.hash(this.password, 12);
 });

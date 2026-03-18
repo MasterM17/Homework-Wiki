@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const dotenv = require("dotenv");
 const { createSendToken } = require("./createSendTokenHandler");
-const sendEmail = require("./emailHandler");
+const { sendEmail } = require("./emailHandler");
 const crypto = require("crypto");
 
 const signup = async (req, res) => {
@@ -14,7 +14,7 @@ const signup = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    await sendEmail.sendEmail({
+    await sendEmail({
       email: newUser.email,
       subject: `Welcome to the Team ${newUser.name}`,
       message: `Hi ${newUser.name}, Welcome to Workout tracker!
@@ -96,7 +96,7 @@ const forgotPassword = async (req, res) => {
     const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/resetPassword/${token}`;
     const message = `Forgot your password? Submit a PATCH request with your new password to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
 
-    await sendEmail.sendEmail({
+    await sendEmail({
       email: user.email,
       subject: `Your password reset token (valid for 10 min)`,
       message: message,
@@ -107,6 +107,7 @@ const forgotPassword = async (req, res) => {
       message: "Token sent to email",
     });
   } catch (err) {
+    console.log("ERROR IN FORGOT PASSWORD: ", err)
     res.status(500).send(err.message);
   }
 };
