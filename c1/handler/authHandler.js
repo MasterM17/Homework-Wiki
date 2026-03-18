@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const dotenv = require("dotenv");
 const { createSendToken } = require("./createSendTokenHandler");
+const sendEmail = require("./emailHandler");
 
 const signup = async (req, res) => {
   try {
@@ -12,7 +13,24 @@ const signup = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
+    await sendEmail.sendEmail({
+      email: newUser.email,
+      subject: `Welcome to the Team ${newUser.name}`,
+      message: `Hi ${newUser.name}, Welcome to Workout tracker!
+You’ve just taken the first step toward a stronger, more disciplined version of yourself.
+Your dashboard is ready. Whether you're hitting a new PR on the bench or tracking your consistency, we’re here to help you stay on top of your game.
+What’s next?
 
+Log your first workout.
+
+Upload a progress photo.
+
+Set your weekly goals.
+
+Stop scrolling and start lifting.
+
+Best, Workout tracker team`,
+    });
     createSendToken(newUser, 201, res);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -58,7 +76,7 @@ const protect = async (req, res, next) => {
     // console.log(req.headers);
 
     let token;
-     if (req.cookies.jwt) {
+    if (req.cookies.jwt) {
       token = req.cookies.jwt;
     }
     if (!token) {

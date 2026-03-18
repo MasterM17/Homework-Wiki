@@ -18,7 +18,7 @@ exports.sendEmail = async (options) => {
   });
 
   const mailOptions = {
-    from: "Workout App <workoutapp@app.com",
+    from: "Workout App <workoutapp@app.com>",
     to: options.email,
     subject: options.subject,
     text: options.message,
