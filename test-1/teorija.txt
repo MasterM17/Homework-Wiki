@@ -1,0 +1,15 @@
+1. Sistem koj ni ovozmozuva razeman na podatoci preku internet
+2. Se isprakjaat request and result poraki
+3. Node.js e okolina (run enviorment) kade sto JavaScript moze da zivee nadvor od web prelistuvaci, 
+dodeka Express.js e framework odnosno zbir na blokovi od kod (kako alatki) koi ni ovozmozuvaat polesno i pobrzo gradenje na aplikacii.
+4. MVC vo prevod modul, view, controller e arhitektura koj standardizira struktuiranje na kod vo tri komponenti za polesno citanje i implementacija
+5. Ruti se takanareceni mostovi za komunikacija pomegju fron end i back end na edna ili povekje aplikacii
+6. Moduli se atalki ili blokovi na kod vo Node koi pomagaat vo pisuvanje i organizacija na kod. 
+Postojat core moduli vo node i 3rd party moduli
+7. Web services se aplikacii preku koi se komunicira i razemuna podatoci na internet
+8. JWT Jeson Web Token se koristi za identifikacija i autorizacija na useri. Se sostoi od 3 komponenti: header, payload i signature
+Vo hederot se naogja tipot na tokenot, vo payload se podatocite za korisnikot i vo signature se naogja enkodiraniot secret koj se koristi za da vidime dali tokenot e promenet
+9. MongoDB e noSQL data baza koj koristi JSON za skladiranje i komunikacija so podatoci.
+10. MongoDBe data baza dodeka Mongoose e library za MongoDB
+11. Synchronus funkcija se izvrsuva vednas so vcituvanje na kodot dodeka Asychrona funkcija se izvrsuva otkako promisot ke bide "dostaven"
+

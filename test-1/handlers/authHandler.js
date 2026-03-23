@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
       return res.status(400).send("Please provide email and password");
     }
 
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({
         data: {
@@ -37,7 +37,6 @@ exports.login = async (req, res) => {
     }
 
     const isPassValid = bcrypt.compareSync(password, user.password);
-
     if (!isPassValid) {
       return res.status(401).json({
         data: {
@@ -53,11 +52,15 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.protect = async (req, res) => {
+exports.protect = async (req, res, next) => {
   try {
+    // console.log(req.headers);
+
     let token;
     if (req.cookies.jwt) {
       token = req.cookies.jwt;
+    } else if (req.headers.authorization && req.headers.authorization.startsWtih("Bearer")){
+        token = req.headers.authorization.split(" ")[1]
     }
     if (!token) {
       return res.status(401).json({
@@ -67,6 +70,8 @@ exports.protect = async (req, res) => {
     }
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    // console.log(decoded);
+
     const userAuth = await User.findById(decoded.id);
     if (!userAuth) {
       return res.status(401).json({
@@ -75,7 +80,6 @@ exports.protect = async (req, res) => {
       });
     }
     req.user = userAuth;
-
     next();
   } catch (err) {
     return res.status(500).send(err.message);

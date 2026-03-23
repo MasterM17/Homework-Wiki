@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const db = require("./pkg/DB/index");
 const academy = require("./handlers/academyHandler");
 const course = require("./handlers/courseHandler");
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.set("view engine", "ejs");
 
 db.initDB();
@@ -28,11 +30,11 @@ app.post("/api/v1/academy", academy.createAcademy);
 app.patch("/api/v1/academy/:id", academy.updAcademy);
 app.delete("api/v1/academy/:id", academy.deleteAcademy);
 
-app.get("/api/v1/course", auth.protect, course.getCourses);
+app.get("/api/v1/course", course.getCourses);
 app.get("/api/v1/course/:id", course.getCourse);
-app.post("/api/v1/course", course.createCourse);
-app.patch("/api/v1/course/:id", course.updCourse);
-app.delete("api/v1/course/:id", course.deleteCourse);
+app.post("/api/v1/course", auth.protect, course.createCourse);
+app.patch("/api/v1/course/:id", auth.protect, course.updCourse);
+app.delete("api/v1/course/:id", auth.protect, course.deleteCourse);
 
 app.listen(process.env.PORT, (err) => {
   if (err) {
