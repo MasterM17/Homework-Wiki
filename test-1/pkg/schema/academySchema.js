@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { courseSchema } = require("./courseSchema");
 
 const academySchema = new mongoose.Schema({
   name: {
@@ -9,6 +10,7 @@ const academySchema = new mongoose.Schema({
     type: String,
     required: [true, "Must have address"],
   },
+  courses: [courseSchema],
 });
 
 const Academy = mongoose.model("Academy", academySchema);

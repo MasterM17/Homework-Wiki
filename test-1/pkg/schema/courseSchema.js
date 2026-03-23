@@ -7,7 +7,7 @@ const courseSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: [true, "Must have addess"],
+    required: [true, "Must have address"],
   },
   category: {
     type: String,
@@ -16,4 +16,4 @@ const courseSchema = new mongoose.Schema({
 });
 
 const Course = mongoose.model("Course", courseSchema);
-module.exports = Course;
+module.exports = { Course, courseSchema };
