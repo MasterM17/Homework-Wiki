@@ -54,8 +54,20 @@ const getForgetPass = (req, res) => {
   }
 };
 
+const getResetPass = (req, res) => {
+  try {
+    res.status(200).render("resetPassword", {
+      status: "sucess",
+      token: req.params.token,
+    });
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   getLoginForm,
   getDashboard,
   getForgetPass,
+  getResetPass,
 };

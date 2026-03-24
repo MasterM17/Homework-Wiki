@@ -56,6 +56,7 @@ app.patch("/api/v1/resetPassword/:token", auth.resetPassword);
 app.get("/login", view.getLoginForm);
 app.get("/dashboard", auth.protect, view.getDashboard);
 app.get("/forgotPassword", view.getForgetPass);
+app.get("/api/v1/resetPassword/:token", view.getResetPass)
 
 
 const port = process.env.PORT;
